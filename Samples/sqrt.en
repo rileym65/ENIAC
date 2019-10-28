@@ -1,0 +1,70 @@
+initiating {
+  go P1-A:1
+  }
+accumulator 1 {
+  power True
+  program 5 {
+    mode alpha
+    clear True
+    programin P1-C:1
+    programout P1-A:2
+    repeat 1
+    }
+  }
+accumulator 2 {
+  power True
+  alpha D1-A
+  beta D1-B
+  a P1-B
+  s P1-C
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:1
+    }
+  program 5 {
+    mode beta
+    clear False
+    programin P1-A:2
+    programout P1-A:3
+    repeat 1
+    }
+  program 6 {
+    mode AS
+    clear False
+    programin P1-A:4
+    repeat 1
+    }
+  }
+accumulator 3 {
+  power True
+  s D1-B
+  program 1 {
+    mode alpha
+    clear True
+    programin P1-A:1
+    }
+  program 2 {
+    mode S
+    clear False
+    programin P1-A:2
+    }
+  program 5 {
+    mode alpha
+    clear True
+    programin P1-A:3
+    programout P1-A:4
+    repeat 2
+    }
+  }
+constant {
+  power True
+  program 9 {
+    mode lr
+    select l
+    programin P1-A:1
+    programout P1-A:2
+    }
+  outputa D1-A
+  regj +0000002013
+  }

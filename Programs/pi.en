@@ -1,0 +1,219 @@
+initiating {
+  go P1-A:1
+  }
+accumulator 1 {
+  power True
+  alpha D2-C
+  program 4 {
+    mode 0
+    clear True
+    programin P1-A:7
+    }
+  program 5 {
+    mode alpha
+    clear False
+    programin P1-A:10
+    repeat 4
+    }
+  }
+accumulator 2 {
+  power True
+  alpha D2-A
+  a D1-A
+  s D1-A
+  }
+accumulator 3 {
+  power True
+  alpha D1-A
+  gamma D2-B
+  a D2-B
+  }
+accumulator 4 {
+  power True
+  }
+accumulator 5 {
+  power True
+  alpha D1-B
+  gamma D2-A
+  a D2-B
+  s D2-B
+  }
+accumulator 7 {
+  power True
+  alpha D2-B
+  a D2-B
+  alphafilter SHL1
+  }
+accumulator 9 {
+  power True
+  alpha D1-A
+  beta D1-A
+  a D2-C
+  alphafilter SHL7
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:1
+    }
+  program 5 {
+    mode beta
+    clear False
+    programin P1-A:4
+    programout P1-A:5
+    repeat 1
+    }
+  program 6 {
+    mode beta
+    clear False
+    programin P1-A:7
+    programout P1-A:10
+    repeat 1
+    }
+  program 7 {
+    mode A
+    clear False
+    programin P1-A:10
+    repeat 4
+    }
+  }
+accumulator 10 {
+  power True
+  alpha D1-A
+  a D1-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:1
+    }
+  program 3 {
+    mode A
+    clear False
+    programin P1-A:6
+    }
+  program 4 {
+    mode A
+    clear False
+    programin P1-A:3
+    }
+  program 5 {
+    mode A
+    clear False
+    programin P1-A:2
+    repeat 2
+    }
+  program 6 {
+    mode A
+    clear False
+    programin P1-A:5
+    repeat 2
+    }
+  }
+accumulator 11 {
+  power True
+  alpha D1-A
+  a D1-B
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:1
+    }
+  program 3 {
+    mode A
+    clear False
+    programin P1-A:6
+    }
+  program 4 {
+    mode A
+    clear False
+    programin P1-A:3
+    }
+  program 5 {
+    mode alpha
+    clear False
+    programin P1-A:2
+    programout P1-A:3
+    repeat 2
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P1-A:5
+    programout P1-A:6
+    repeat 2
+    }
+  }
+constant {
+  power True
+  program 9 {
+    mode lr
+    select l
+    programin P1-A:1
+    programout P1-A:10
+    }
+  program 10 {
+    mode lr
+    select r
+    }
+  outputa D1-A
+  regj +0000000010
+  }
+master {
+  power True
+  decade 15 1 9
+  decade 16 1 9
+  decade 17 1 9
+  decade 18 1 9
+  decade 15 2 9
+  decade 16 2 9
+  decade 17 2 9
+  decade 18 2 9
+  decade 15 3 9
+  decade 16 3 9
+  decade 17 3 9
+  decade 18 3 9
+  decade 15 4 9
+  decade 16 4 9
+  decade 17 4 9
+  decade 18 4 9
+  decade 15 5 9
+  decade 16 5 9
+  decade 17 5 9
+  decade 18 5 9
+  decade 15 6 9
+  decade 16 6 9
+  decade 17 6 9
+  decade 18 6 9
+  association 7 C
+  stepper C {
+    in P1-A:10
+    out 1 P1-A:2
+    out 2 P1-A:2
+    out 3 P1-A:2
+    out 4 P1-A:2
+    out 5 P1-A:2
+    }
+  }
+divider {
+  power true
+  program 1 {
+    numclear true
+    nummode alpha
+    denclear true
+    denmode alpha
+    mode div10
+    answer 2
+    programin P1-A:3
+    programout P1-A:4
+    }
+  program 2 {
+    numclear true
+    nummode alpha
+    denclear true
+    denmode alpha
+    mode div10
+    answer 1
+    programin P1-A:6
+    programout P1-A:7
+    }
+  digitout D2-A
+  }

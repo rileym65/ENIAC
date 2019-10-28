@@ -1,0 +1,403 @@
+initiating {
+  go P1-A:1
+  }
+accumulator 1 {
+  power True
+  alpha D1-A
+  beta D1-A
+  gamma D1-A
+  a P1-H
+  s P1-I
+  alphafilter SHR1
+  gammafilter LO1
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-E:1
+    }
+  program 2 {
+    mode beta
+    clear False
+    programin P1-E:2
+    }
+  program 3 {
+    mode 0
+    clear True
+    programin P1-E:6
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-A:2
+    }
+  program 5 {
+    mode 0
+    clear True
+    programin P1-E:3
+    programout P1-E:4
+    repeat 1
+    }
+  program 6 {
+    mode gamma
+    clear False
+    programin P1-E:4
+    programout P1-E:2
+    repeat 1
+    }
+  program 7 {
+    mode 0
+    clear False
+    programin P1-E:7
+    programout P1-E:8
+    repeat 2
+    }
+  program 8 {
+    mode beta
+    clear False
+    programin P1-E:8
+    programout P1-E:9
+    repeat 1
+    }
+  program 9 {
+    mode AS
+    clear False
+    programin P1-E:9
+    repeat 1
+    }
+  program 10 {
+    mode 0
+    clear False
+    programin P1-I:1
+    programout P1-C:1
+    repeat 1
+    }
+  }
+accumulator 2 {
+  power True
+  program 5 {
+    mode 0
+    clear False
+    programin P1-H:1
+    programout P1-A:2
+    repeat 1
+    }
+  program 6 {
+    mode 0
+    clear False
+    programin P1-D:2
+    programout P1-F:1
+    repeat 4
+    }
+  program 7 {
+    mode 0
+    clear False
+    programin P1-D:3
+    programout P1-F:2
+    repeat 4
+    }
+  }
+accumulator 3 {
+  power True
+  alpha D1-A
+  a D1-A
+  program 2 {
+    mode 0
+    clear True
+    programin P1-A:2
+    }
+  program 3 {
+    mode 0
+    clear True
+    programin P1-D:2
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-A:1
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-D:1
+    programout P1-E:1
+    repeat 1
+    }
+  program 6 {
+    mode A
+    clear False
+    programin P1-E:6
+    programout P1-E:7
+    repeat 1
+    }
+  program 7 {
+    mode alpha
+    clear True
+    programin P1-E:7
+    repeat 1
+    }
+  program 8 {
+    mode alpha
+    clear False
+    programin P1-F:1
+    programout P1-E:1
+    repeat 1
+    }
+  program 9 {
+    mode alpha
+    clear False
+    programin P1-F:2
+    programout P1-E:5
+    repeat 1
+    }
+  program 10 {
+    mode A
+    clear True
+    programin P1-D:4
+    programout P1-E:1
+    repeat 1
+    }
+  }
+accumulator 4 {
+  power True
+  alpha D1-A
+  beta D1-B
+  a D1-A
+  s P2-D
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:1
+    }
+  program 2 {
+    mode A
+    clear False
+    programin P1-E:4
+    }
+  program 5 {
+    mode A
+    clear False
+    programin P1-E:1
+    programout P1-E:2
+    repeat 1
+    }
+  program 6 {
+    mode beta
+    clear False
+    programin P1-D:3
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-D:5
+    programout P1-D:6
+    repeat 1
+    }
+  program 8 {
+    mode S
+    clear False
+    programin P1-D:6
+    repeat 1
+    }
+  program 9 {
+    mode beta
+    clear False
+    programin P2-D:1
+    programout P1-A:2
+    repeat 1
+    }
+  }
+accumulator 5 {
+  power True
+  a D1-B
+  s D1-B
+  program 1 {
+    mode alpha
+    clear True
+    programin P1-A:1
+    }
+  program 2 {
+    mode S
+    clear False
+    programin P1-D:3
+    }
+  program 3 {
+    mode S
+    clear False
+    programin P1-D:5
+    }
+  program 4 {
+    mode A
+    clear False
+    programin P2-D:1
+    }
+  }
+constant {
+  power True
+  program 9 {
+    mode lr
+    select l
+    programin P1-A:1
+    programout P1-A:2
+    }
+  program 10 {
+    mode lr
+    select r
+    programin P1-E:2
+    programout P1-C:1
+    }
+  program 19 {
+    mode lr
+    select r
+    }
+  outputa D1-A
+  regj +0000000099
+  regk +0000000048
+  }
+cardpunch {
+  power True
+  programin P1-C:1
+  programout P1-C:2
+  }
+master {
+  power True
+  decade 11 1 1
+  decade 20 1 1
+  decade 11 2 9
+  decade 12 2 9
+  decade 20 2 1
+  decade 11 3 9
+  decade 12 3 9
+  decade 20 3 1
+  decade 20 4 1
+  decade 20 5 1
+  decade 20 6 1
+  association 5 E
+  stepper A {
+    clear 5
+    in P1-A:2
+    directclear P1-A:1
+    out 1 P1-D:1
+    out 2 P1-D:2
+    out 3 P1-D:3
+    out 4 P1-D:4
+    out 5 P1-D:5
+    }
+  stepper E {
+    directin P1-F:2
+    in P1-C:2
+    directclear P1-A:2
+    out 1 P1-E:3
+    out 2 P1-E:5
+    }
+  }
+function 1 {
+  power true
+  program 1 {
+    clear nc
+    mode add
+    programin P1-E:5
+    }
+  program 2 {
+    clear 0
+    mode add-2
+    programin P1-D:2
+    }
+  program 3 {
+    clear 0
+    mode add-1
+    programin P1-D:3
+    }
+  outputnc P1-E:6
+  argin D1-A
+  outputa D1-A
+  a1 0
+  a2 0
+  a3 0
+  a4 0
+  b1 0
+  b2 0
+  b3 0
+  b4 0
+  data -2 +000030000000+
+  data -1 +000050000000+
+  data 0 +000032000000+
+  data 1 +000098000000+
+  data 2 +000111000000+
+  data 3 +000116000000+
+  data 4 +000116000000+
+  data 5 +000108000000+
+  data 6 +000101000000+
+  data 7 +000115000000+
+  data 8 +000032000000+
+  data 9 +000111000000+
+  data 10 +000102000000+
+  data 11 +000032000000+
+  data 12 +000098000000+
+  data 13 +000101000000+
+  data 14 +000101000000+
+  data 15 +000114000000+
+  data 16 +000032000000+
+  data 17 +000111000000+
+  data 18 +000110000000+
+  data 19 +000032000000+
+  data 20 +000116000000+
+  data 21 +000104000000+
+  data 22 +000101000000+
+  data 23 +000032000000+
+  data 24 +000119000000+
+  data 25 +000097000000+
+  data 26 +000108000000+
+  data 27 +000108000000+
+  data 28 +000010000000+
+  data 29 -999999000000+
+  data 30 +000032000000+
+  data 31 +000098000000+
+  data 32 +000111000000+
+  data 33 +000116000000+
+  data 34 +000116000000+
+  data 35 +000108000000+
+  data 36 +000101000000+
+  data 37 +000115000000+
+  data 38 +000032000000+
+  data 39 +000111000000+
+  data 40 +000102000000+
+  data 41 +000032000000+
+  data 42 +000098000000+
+  data 43 +000101000000+
+  data 44 +000101000000+
+  data 45 +000114000000+
+  data 46 +000010000000+
+  data 47 -999999000000+
+  data 50 +000084000000+
+  data 51 +000097000000+
+  data 52 +000107000000+
+  data 53 +000101000000+
+  data 54 +000032000000+
+  data 55 +000111000000+
+  data 56 +000110000000+
+  data 57 +000101000000+
+  data 58 +000032000000+
+  data 59 +000100000000+
+  data 60 +000111000000+
+  data 61 +000119000000+
+  data 62 +000110000000+
+  data 63 +000044000000+
+  data 64 +000032000000+
+  data 65 +000112000000+
+  data 66 +000097000000+
+  data 67 +000115000000+
+  data 68 +000115000000+
+  data 69 +000032000000+
+  data 70 +000105000000+
+  data 71 +000116000000+
+  data 72 +000032000000+
+  data 73 +000097000000+
+  data 74 +000114000000+
+  data 75 +000111000000+
+  data 76 +000117000000+
+  data 77 +000110000000+
+  data 78 +000100000000+
+  data 79 +000010000000+
+  data 80 -999999000000+
+  }

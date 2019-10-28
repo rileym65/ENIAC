@@ -1,0 +1,113 @@
+initiating {
+  go P1-A:4
+  }
+accumulator 1 {
+  power True
+  masterclear True
+  alpha D1-A
+  a D1-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:2
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-A:6
+    }
+  program 5 {
+    mode A
+    clear False
+    programin P1-A:4
+    programout P1-A:5
+    repeat 1
+    }
+  }
+accumulator 2 {
+  power True
+  masterclear True
+  alpha D1-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:3
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-A:6
+    }
+  }
+accumulator 15 {
+  power True
+  masterclear True
+  alpha D1-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:3
+    }
+  program 5 {
+    mode alpha
+    clear False
+    programin P1-A:4
+    repeat 1
+    }
+  program 6 {
+    mode 0
+    clear True
+    programin P1-A:6
+    programout P1-B:1
+    repeat 1
+    }
+  program 7 {
+    mode 0
+    clear False
+    repeat 1
+    }
+  }
+constant {
+  power True
+  program 1 {
+    mode lr
+    select l
+    programin P1-A:2
+    programout P1-A:3
+    }
+  program 2 {
+    mode lr
+    select r
+    programin P1-A:3
+    programout P1-A:4
+    }
+  outputa D1-A
+  }
+cardpunch {
+  power True
+  programin P1-A:5
+  programout P1-A:6
+  coupler 1 c
+  coupler 3 c
+  coupler 5 c
+  print 7 off
+  print 8 off
+  print 9 off
+  print 10 off
+  print 11 off
+  print 12 off
+  print 13 off
+  print 14 off
+  print 15 off
+  print 16 off
+  }
+cardreader {
+  power True
+  programin P1-A:4
+  programout P1-A:2
+  interlock P1-B:1
+  }
+hopper +0000000008+0000000007
+hopper +0000000004+0000000005
+hopper +0000000012+0000000020
+hopper +0000000123+0000000456

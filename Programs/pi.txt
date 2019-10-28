@@ -1,0 +1,31 @@
+This setup computes the value of PI using the 1 - 1/3 + 1/5 - 1/7 + 1/9 ... 
+method.  It will compute PI to 5 decimal places, which it does after about
+56,250 iterations.  It is not the best way for computing PI but I wanted to
+keep the program simple so that it is easily understood.
+
+Acc1  - Holds final calculation
+Acc2  - Quotient for divider      Sends on D1-A
+Acc3  - Numerator for divider     Sends on D2-B
+Acc5  - Denominator for divider   Sends on D2-B
+Acc7  - Shifter for divider       Sends on D2-B
+Acc9  - Results accumulation      Sends on D2-C
+Acc10 - Holds 1.0                 Sends on D1-A
+Acc11 - Holds numerator           Sends on D1-B
+
+Program initiation:
+P1-A:1    Init     Const J (1.0) -> A9,A10,A11
+                   Then triggers P1-A:10
+
+Main program loop:
+P1-A:2    Mprg     Acc11 += 2 * Acc10 (1.0)
+P1-A:3    A11      -(Acc10 / Acc11)
+P1-A:4    Div      Acc9 recieves result of division
+P1-A:5    A9       Acc11 += 2 * Acc10 (1.0)
+P1-A:6    A11      +(Acc10 / Acc11)
+P1-A:7    Div      Acc9 receives result of division, Clear Acc1
+P1-A:10   A9       Mprg Next Iteration.  Acc1 = 4 * Acc9
+
+Constant J = +1.0
+
+Master Programmer
+  Stepper C - Iteration loop.  Each loop triggers P1-A:2

@@ -1,0 +1,980 @@
+initiating {
+  go P1-A:1
+  }
+accumulator 1 {
+  power True
+  alpha D1-A
+  beta D1-A
+  a D1-A
+  betafilter SHR9
+  program 1 {
+    mode beta
+    clear False
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:6
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-D:1
+    programout P1-D:2
+    repeat 1
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P1-D:2
+    programout P1-D:3
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-D:3
+    programout P1-D:4
+    repeat 1
+    }
+  }
+accumulator 2 {
+  power True
+  alpha D1-A
+  beta D1-A
+  a D1-A
+  betafilter SHR9
+  program 1 {
+    mode A
+    clear False
+    programin P1-D:3
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:6
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-D:4
+    programout P1-D:5
+    repeat 1
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P1-D:5
+    programout P1-D:6
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-D:6
+    programout P1-D:7
+    repeat 1
+    }
+  }
+accumulator 3 {
+  power True
+  alpha D1-A
+  a D1-D
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:1
+    }
+  program 3 {
+    mode alpha
+    clear False
+    programin P1-C:6
+    }
+  program 4 {
+    mode A
+    clear False
+    programin P1-B:5
+    }
+  program 5 {
+    mode alpha
+    clear False
+    programin P1-F:4
+    programout P1-F:5
+    repeat 1
+    }
+  program 12 {
+    mode 0
+    clear True
+    programin P1-C:5
+    repeat 1
+    }
+  }
+accumulator 4 {
+  power True
+  alpha D1-A
+  beta D1-B
+  a D1-E
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:2
+    }
+  program 2 {
+    mode A
+    clear False
+    programin P1-B:6
+    }
+  program 4 {
+    mode A
+    clear False
+    }
+  program 5 {
+    mode 0
+    clear False
+    programin P1-C:6
+    programout P1-C:7
+    repeat 4
+    }
+  program 6 {
+    mode beta
+    clear False
+    programin P1-C:7
+    programout P1-C:8
+    repeat 1
+    }
+  }
+accumulator 5 {
+  power True
+  alpha D1-A
+  beta D1-B
+  gamma D1-D
+  a D1-A
+  program 1 {
+    mode A
+    clear False
+    programin P5-A:1
+    }
+  program 2 {
+    mode 0
+    clear True
+    programin P1-D:1
+    }
+  program 3 {
+    mode 0
+    clear True
+    programin P1-B:5
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:1
+    }
+  program 5 {
+    mode beta
+    clear False
+    programin P1-B:6
+    programout P1-B:7
+    repeat 1
+    }
+  }
+accumulator 6 {
+  power True
+  alpha D1-A
+  beta D1-E
+  a D1-B
+  program 1 {
+    mode A
+    clear False
+    programin P5-A:7
+    }
+  program 2 {
+    mode 0
+    clear True
+    programin P5-B:4
+    }
+  program 3 {
+    mode 0
+    clear True
+    programin P1-D:1
+    }
+  program 5 {
+    mode alpha
+    clear False
+    programin P1-B:5
+    programout P1-B:6
+    repeat 2
+    }
+  program 6 {
+    mode beta
+    clear False
+    programin P1-B:6
+    repeat 1
+    }
+  program 7 {
+    mode 0
+    clear True
+    programin P1-C:1
+    programout P1-C:2
+    repeat 1
+    }
+  program 8 {
+    mode 0
+    clear True
+    repeat 1
+    }
+  }
+accumulator 7 {
+  power True
+  alpha D1-C
+  beta D1-A
+  gamma D1-D
+  a D1-B
+  alphafilter SHL2
+  program 1 {
+    mode 0
+    clear True
+    programin P1-B:1
+    }
+  program 2 {
+    mode A
+    clear True
+    programin P1-B:6
+    }
+  program 3 {
+    mode A
+    clear True
+    programin P1-F:2
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-B:9
+    }
+  program 5 {
+    mode alpha
+    clear False
+    programin P5-B:7
+    repeat 1
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P5-B:8
+    repeat 1
+    }
+  program 7 {
+    mode 0
+    clear False
+    programin P1-B:4
+    programout P1-B:5
+    repeat 1
+    }
+  program 8 {
+    mode epsilon
+    clear True
+    programin P1-C:3
+    programout P1-D:1
+    repeat 1
+    }
+  program 9 {
+    mode 0
+    clear True
+    programin P1-C:4
+    programout P1-D:1
+    repeat 1
+    }
+  program 12 {
+    mode gamma
+    clear False
+    programin P1-B:5
+    repeat 1
+    }
+  }
+accumulator 8 {
+  power True
+  alpha D1-A
+  a D1-E
+  s D1-E
+  alphafilter SHL1
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-E:2
+    }
+  program 2 {
+    mode A
+    clear True
+    programin P1-E:3
+    }
+  program 3 {
+    mode alpha
+    clear False
+    programin P1-E:5
+    }
+  program 4 {
+    mode A
+    clear True
+    programin P1-E:6
+    }
+  program 5 {
+    mode epsilon
+    clear True
+    programin P1-B:1
+    repeat 4
+    }
+  program 6 {
+    mode epsilon
+    clear False
+    programin P1-B:9
+    programout P1-B:10
+    repeat 1
+    }
+  program 7 {
+    mode S
+    clear True
+    programin P1-B:10
+    repeat 1
+    }
+  program 8 {
+    mode alpha
+    clear False
+    programin P1-E:8
+    repeat 1
+    }
+  program 9 {
+    mode A
+    clear True
+    programin P1-E:9
+    repeat 1
+    }
+  program 10 {
+    mode alpha
+    clear False
+    programin P1-E:11
+    repeat 1
+    }
+  program 11 {
+    mode A
+    clear True
+    programin P1-F:1
+    repeat 1
+    }
+  }
+accumulator 9 {
+  power True
+  alpha D1-A
+  beta D1-B
+  s D5-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P5-A:1
+    }
+  program 2 {
+    mode beta
+    clear False
+    programin P5-A:2
+    }
+  program 6 {
+    mode S
+    clear False
+    programin P5-B:1
+    repeat 1
+    }
+  }
+accumulator 10 {
+  power True
+  alpha D1-A
+  beta D1-B
+  s D5-B
+  program 1 {
+    mode alpha
+    clear False
+    programin P5-A:6
+    }
+  program 2 {
+    mode beta
+    clear False
+    programin P5-A:7
+    }
+  program 6 {
+    mode S
+    clear False
+    programin P5-B:2
+    repeat 1
+    }
+  }
+accumulator 11 {
+  power True
+  alpha D5-A
+  a D5-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P5-B:1
+    }
+  program 2 {
+    mode A
+    clear True
+    programin P5-B:3
+    }
+  }
+accumulator 12 {
+  power True
+  alpha D1-C
+  beta D1-A
+  a D1-A
+  alphafilter SHL2
+  betafilter SHL1
+  program 1 {
+    mode 0
+    clear True
+    programin P1-B:1
+    }
+  program 2 {
+    mode beta
+    clear False
+    programin P1-D:1
+    }
+  program 3 {
+    mode A
+    clear True
+    programin P1-D:2
+    }
+  program 4 {
+    mode beta
+    clear False
+    programin P1-D:4
+    }
+  program 5 {
+    mode alpha
+    clear False
+    programin P5-B:4
+    repeat 1
+    }
+  program 6 {
+    mode A
+    clear True
+    programin P1-B:5
+    repeat 2
+    }
+  program 7 {
+    mode A
+    clear True
+    programin P1-D:5
+    repeat 1
+    }
+  program 8 {
+    mode beta
+    clear False
+    programin P1-D:7
+    repeat 1
+    }
+  program 9 {
+    mode A
+    clear True
+    programin P1-D:8
+    repeat 1
+    }
+  program 10 {
+    mode beta
+    clear False
+    programin P1-D:10
+    repeat 1
+    }
+  program 11 {
+    mode A
+    clear True
+    programin P1-D:11
+    repeat 1
+    }
+  }
+accumulator 13 {
+  power True
+  alpha D5-C
+  beta D5-B
+  gamma D5-A
+  a D1-C
+  s D1-C
+  program 1 {
+    mode beta
+    clear False
+    programin P5-B:2
+    }
+  program 2 {
+    mode gamma
+    clear False
+    programin P5-B:3
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P5-B:4
+    repeat 1
+    }
+  program 8 {
+    mode A
+    clear True
+    programin P5-B:7
+    repeat 1
+    }
+  program 9 {
+    mode S
+    clear True
+    programin P5-B:8
+    repeat 1
+    }
+  }
+accumulator 14 {
+  power True
+  alpha D1-C
+  beta D1-E
+  a P1-H
+  s P1-I
+  betafilter SHL6
+  program 1 {
+    mode alpha
+    clear False
+    programin P5-B:7
+    }
+  program 2 {
+    mode 0
+    clear True
+    programin P1-B:6
+    }
+  program 5 {
+    mode 0
+    clear False
+    repeat 1
+    }
+  program 6 {
+    mode beta
+    clear False
+    programin P1-B:10
+    programout P1-B:11
+    repeat 1
+    }
+  program 7 {
+    mode AS
+    clear True
+    programin P1-B:11
+    repeat 1
+    }
+  program 11 {
+    mode 0
+    clear False
+    programin P1-H:1
+    programout P1-C:2
+    repeat 1
+    }
+  program 12 {
+    mode 0
+    clear False
+    programin P1-I:1
+    programout P1-C:4
+    repeat 1
+    }
+  }
+accumulator 15 {
+  power True
+  alpha D1-A
+  beta D1-A
+  a D1-A
+  betafilter SHR9
+  program 1 {
+    mode A
+    clear False
+    programin P1-D:6
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:6
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-D:7
+    programout P1-D:8
+    repeat 1
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P1-D:8
+    programout P1-D:9
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-D:9
+    programout P1-D:10
+    repeat 1
+    }
+  }
+accumulator 16 {
+  power True
+  alpha D1-A
+  beta D1-A
+  a D1-A
+  betafilter SHR9
+  program 1 {
+    mode A
+    clear False
+    programin P1-D:9
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:6
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-D:10
+    programout P1-D:11
+    repeat 1
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P1-D:11
+    programout P1-E:1
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-E:1
+    programout P1-E:2
+    repeat 1
+    }
+  }
+accumulator 17 {
+  power True
+  alpha D1-A
+  beta D1-A
+  gamma D1-E
+  a D1-A
+  betafilter SHR9
+  program 1 {
+    mode A
+    clear False
+    programin P1-E:1
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:6
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-E:2
+    programout P1-E:3
+    repeat 1
+    }
+  program 6 {
+    mode gamma
+    clear False
+    programin P1-E:3
+    programout P1-E:4
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-E:4
+    programout P1-E:5
+    repeat 1
+    }
+  }
+accumulator 18 {
+  power True
+  alpha D1-A
+  beta D1-A
+  gamma D1-E
+  a D1-A
+  betafilter SHR9
+  program 1 {
+    mode A
+    clear False
+    programin P1-E:4
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:6
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-E:5
+    programout P1-E:6
+    repeat 1
+    }
+  program 6 {
+    mode gamma
+    clear False
+    programin P1-E:6
+    programout P1-E:7
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-E:7
+    programout P1-E:8
+    repeat 1
+    }
+  }
+accumulator 19 {
+  power True
+  alpha D1-E
+  beta D1-A
+  a D1-A
+  betafilter SHR9
+  program 1 {
+    mode A
+    clear False
+    programin P1-E:7
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:6
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-E:8
+    programout P1-E:9
+    repeat 1
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P1-E:9
+    programout P1-E:10
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-E:10
+    programout P1-E:11
+    repeat 1
+    }
+  }
+accumulator 20 {
+  power True
+  alpha D1-E
+  beta D1-B
+  a D1-A
+  program 1 {
+    mode A
+    clear False
+    programin P1-E:10
+    }
+  program 4 {
+    mode 0
+    clear True
+    programin P1-C:6
+    }
+  program 5 {
+    mode A
+    clear True
+    programin P1-E:11
+    programout P1-F:1
+    repeat 1
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P1-F:1
+    programout P1-F:2
+    repeat 1
+    }
+  program 7 {
+    mode beta
+    clear False
+    programin P1-F:2
+    programout P1-F:3
+    repeat 1
+    }
+  program 8 {
+    mode 0
+    clear False
+    programin P1-F:3
+    programout P1-F:4
+    repeat 4
+    }
+  }
+constant {
+  power True
+  program 9 {
+    mode lr
+    select l
+    programin P1-A:1
+    programout P1-A:2
+    }
+  program 10 {
+    mode lr
+    select r
+    programin P1-A:2
+    programout P1-C:8
+    }
+  program 19 {
+    mode lr
+    select l
+    programin P1-C:6
+    }
+  jlm True
+  jrm True
+  klm True
+  krm True
+  outputa D1-A
+  regj -9800000000
+  regk -9900000000
+  }
+cardpunch {
+  power True
+  programin P1-C:5
+  programout P1-C:6
+  coupler 1 c
+  coupler 2 c
+  coupler 3 c
+  coupler 4 c
+  coupler 5 c
+  coupler 6 c
+  coupler 7 c
+  coupler 8 c
+  coupler 9 c
+  coupler 10 c
+  coupler 11 c
+  coupler 12 c
+  coupler 13 c
+  coupler 14 c
+  coupler 15 c
+  }
+master {
+  power True
+  decade 12 1 8
+  decade 15 1 5
+  decade 20 1 8
+  association 5 E
+  association 7 C
+  association 8 B
+  stepper B {
+    in P1-C:8
+    directclear P1-A:1
+    out 1 P1-F:5
+    }
+  stepper C {
+    in P1-C:2
+    directclear P1-C:1
+    out 1 P1-B:1
+    out 2 P1-C:3
+    }
+  stepper E {
+    in P1-F:5
+    directclear P1-C:8
+    out 1 P1-C:1
+    out 2 P1-C:5
+    }
+  }
+multiplier {
+  power true
+  program 1 {
+    ierclear true
+    iermode alpha
+    icandclear true
+    icandmode alpha
+    product AC
+    figures 1
+    places 10
+    programin P1-B:1
+    programout P1-B:2
+    }
+  program 2 {
+    ierclear true
+    iermode beta
+    icandclear true
+    icandmode beta
+    product SC
+    figures 1
+    places 10
+    programin P1-B:2
+    programout P1-B:3
+    }
+  program 3 {
+    ierclear true
+    iermode alpha
+    icandclear true
+    icandmode beta
+    product A
+    figures 1
+    places 10
+    programin P1-B:3
+    programout P1-B:4
+    }
+  program 4 {
+    ierclear true
+    iermode alpha
+    icandclear true
+    icandmode alpha
+    product AC
+    figures 1
+    places 10
+    programin P1-B:7
+    programout P1-B:8
+    }
+  program 5 {
+    ierclear true
+    iermode beta
+    icandclear true
+    icandmode beta
+    product AC
+    figures 1
+    places 10
+    programin P1-B:8
+    programout P1-B:9
+    }
+  ralpha P5-A:1
+  rbeta P5-A:2
+  dalpha P5-A:6
+  dbeta P5-A:7
+  outputa P5-B:4
+  outputac P5-B:7
+  outputsc P5-B:8
+  outputrs P5-B:1
+  outputds P5-B:2
+  outputf P5-B:3
+  lhpp1 D5-A
+  rhpp1 D5-C
+  }
+function 1 {
+  power true
+  program 1 {
+    clear 0
+    mode add
+    programin P1-F:3
+    }
+  program 2 {
+    clear 0
+    mode add
+    programin P1-C:6
+    }
+  outputa D1-A
+  outputb D1-B
+  a1 0
+  a2 0
+  a3 0
+  a4 3
+  b1 0
+  b2 0
+  b3 0
+  b4 2
+  data 0 +125000500000+
+  }

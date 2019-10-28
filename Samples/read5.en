@@ -1,0 +1,43 @@
+initiating {
+  go P1-A:1
+  }
+accumulator 1 {
+  power True
+  alpha D1-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:2
+    }
+  }
+accumulator 2 {
+  power True
+  alpha D1-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:3
+    }
+  }
+constant {
+  power True
+  program 1 {
+    mode l
+    select l
+    programin P1-A:2
+    programout P1-A:3
+    }
+  program 2 {
+    mode r
+    select l
+    programin P1-A:3
+    }
+  outputa D1-A
+  }
+cardreader {
+  power True
+  programin P1-A:1
+  programout P1-A:2
+  interlock P1-A:1
+  }
+hopper +00002+00005

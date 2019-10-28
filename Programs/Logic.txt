@@ -1,0 +1,192 @@
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8
+
+The original ENIAC computer was programmed in hardware by setting switches on
+its various units and then cabling the units together.  The process of 
+programming ENIAC for new computations was very time intensive and prone to
+errors.  It was not uncommon to take several weeks to map out a problem on the
+ENIAC and then program it for the problem.
+
+After 1948 ENIAC was modified to allow it to run programs from its portable
+function tables.  Once this modification was done programs could be stored on
+the function tables for exectution and no longer requiring rewiring or 
+resetting any of ENIACs switches.  This reduced the reprogramming time of 
+ENIAC from weeks down to hours.  This did have a hit on performance, with the
+machine now running about 1/6 as fast.  This being due to the time it took to
+retrieve the next instruction from the function table, decode it and then
+execute it.  ENIAC also lost its ability for parallel computation with this
+modification.
+
+I have very little information on how this was done.  I do know that a couple
+of new units were added to ENIAC to facilitate this procedure.  I wondered if
+it was possible to use the original ENIAC hardware to produce this type of
+stored-program computer.  This setup is my attempt at doing that.  With the
+method that I used for instruction decoding (using the Master Programmer) I
+had 36 instruction types available to me.  With just these 36 instructions I
+produced the instruction set below which gives the ability use any of ENIACs
+capabilities.
+
+With the method that I used for program storage a program of up to 100 steps
+can be produced.  The program itself is stored on function table 1.
+
+Instruction Set
+===============
+  00 xxxx xxxxxx        - Halt
+  01 nnnn nnnnnn        - A += n
+  02 nnnn nnnnnn        - A -= n
+  03 xxxx xxxxxx        - A = 0 
+  04 xxxx aaaaaa        - A[15-20] += A
+  05 xxxx aaaaaa        - A[15-20] = 0
+  10 xxxx aaaaaa        - A += A[15-20]
+  11 xxxx xxxxxx        - Punch card
+  12 xxxx xxxxxx        - Read card
+  13 xxxx xxxxxx        - A += A15 * A16
+  14 xxxx xxxxxx        - A += A15 / A16
+  15 xxxx aaaaaa        - A -= A[15-20]
+  20 nnnn nnnnnn        - B += n
+  21 xxxx xxxxxx        - B = 0
+  22 xxxx xxxxxx        - A += B
+  23 xxxx xxxxxx        - B += A
+  24 xxxx xxxxxx        - B >>= 1
+  25 xxxx xxxxxx        - B <<= 1
+  30 xxxx xxxxnn        - IP = n
+  31 xxxx xxxxnn        - IP = n if A < 0
+  32 xxxx xxxxxx        - R17 += CA
+  33 xxxx xxxxxx        - R17 += CB
+  34 xxxx xxxxxx        - R17 += CC
+  35 xxxx xxxxxx        - R17 += CD
+  40 xxxx xxxxxx        - R17 += CE
+  41 xxxx xxxxxx        - R17 += CF
+  42 xxxx xxxxxx        - R17 += CG
+  43 xxxx xxxxxx        - R17 += CH
+  44 xxxx xxxxxx        - R18 += CJ
+  45 xxxx xxxxxx        - R18 += CK
+  50 xxxx xxxxxx        - R19,R20 = f2(19)
+  51 xxxx xxxxxx        - R19,R20 = F3(19)
+  52 xxxx xxxxxx        - B = sqrt(R15)
+  53 xxxx xxxxxx        - B = -B
+  54 xxxx xxxxxx        - IP += R19
+  55 xxxx xxxxxx        - Clear all registers
+
+Here is a sample program for computing PI, which is loaded by default
+on this setup.
+
+[0]  01 0100 000000     A = 1.0
+[1]  04 0000 000001     R20 = 1.0
+[2]  03 0000 000000     A = 0
+[3]  01 0000 000010     A = 1
+[4]  04 0000 110000     R15,R16 = A
+[5]  04 0000 010000     R16 += 1
+[6]  04 0000 010000     R16 += 1
+[7]  03 0000 000000     A = 0
+[8]  14 0000 000000     A = R15/R16
+[9]  04 0000 001000     R17 = A
+[10] 03 0000 000000     A = 0
+[11] 10 0000 100000     A = 1
+[12] 04 0000 010000     R16 += 1
+[13] 04 0000 010000     R16 += 1
+[14] 03 0000 000000     A = 0
+[15] 14 0000 000000     A = R15/R16
+[16] 04 0000 000100     R18 = A
+[17] 03 0000 000000     A = 0
+[18] 10 0000 000001     A = R20
+[19] 15 0000 001000     A -= R17
+[20] 10 0000 000100     A += R18
+[21] 05 0000 001111     Clear registers 17-20
+[22] 04 0000 000001     R20 = A
+[23] 03 0000 000000     A = 0
+[24] 10 0000 100000     A = 1
+[25] 30 0000 000005     Jmp 5
+
+
+
+Accumulator Usage
+=================
+ACC 1: Reg A
+ACC 2: Divider - Quotient, Reg B
+Acc 3: Divider - Numerator
+Acc 4: IP - Instruction Pointer
+Acc 5: Divider - Denominator
+Acc 6: used for instruction decoding
+Acc 7: Divider - Shifter
+Acc 8: Used for instruction decoding
+Acc 9: Multiplier - Multiplier
+       Instruction decoder - multiple registers 15-20 (rx)
+Acc 10: Multiplier - Multiplicand
+       Instruction decode - multiple registers 15-20 (tx)
+Acc 11: Multiplier - LHPP I
+Acc 12: Instruction decode - multiple registers 15-20 (clear)
+Acc 13: Multiplier - LHPP 2
+Acc 14: Used for signed test
+Acc 15-20: User data
+
+
+Program Pulses
+==============
+P1-G:1 Init  - Clear program pointer
+P1-G:2 Many   - Initiate read of instruction
+P1-G:3 Fun1  - Stimulate read of instruction pointer to function table
+P1-G:4 Acc4  - Increment instruction pointer
+P1-G:5 Acc6  - Receive argument into 6 and 8
+P1-G:6 Fun1  - Execute instruction
+
+P1-A:1   01nnnn nnnnnn
+P1-A:2   02nnnn nnnnnn
+P1-A:3   03xxxx xxxxxx
+P1-A:4   04xxxx aaaaaa
+P1-A:5   05xxxx aaaaaa
+P1-A:6   10xxxx aaaaaa
+P1-A:7   11xxxx xxxxxx
+P1-A:8   12xxxx xxxxxx
+P1-A:9   13xxxx xxxxxx
+P1-A:10  14xxxx xxxxxx
+P1-A:11  15xxxx aaaaaa
+P1-B:1   20nnnn nnnnnn
+P1-B:2   21xxxx xxxxxx
+P1-B:3   22xxxx xxxxxx
+P1-B:4   23xxxx xxxxxx
+P1-B:5   24xxxx xxxxxx
+P1-B:6   25xxxx xxxxxx
+P1-B:7   30xxxx xxxxnn
+P1-B:8   31xxxx xxxxnn
+P1-B:9   32xxxx xxxxxx
+P1-B:10  33xxxx xxxxxx
+P1-B:11  34xxxx xxxxxx
+P1-C:1   35xxxx xxxxxx
+P1-C:2   40xxxx xxxxxx
+P1-C:3   41xxxx xxxxxx
+P1-C:4   42xxxx xxxxxx
+P1-C:5   43xxxx xxxxxx
+P1-C:6   44xxxx xxxxxx
+P1-C:7   45xxxx xxxxxx
+P1-C:8   50xxxx xxxxxx
+P1-C:9   51xxxx xxxxxx
+P1-C:10  52xxxx xxxxxx
+P1-C:11  53xxxx xxxxxx
+P1-D:1   54xxxx xxxxxx
+P1-D:2   55xxxx xxxxxx
+
+P2-A:1  Acc6  - Acc1 -= Acc8
+P2-A:2  Acc9  - Acc1 send
+P2-A:3  Acc10 - Acc1 += trays
+P2-A:4  Acc20 - Release interlock on reader
+P2-A:5  Acc9  - Trigger load of multiplier
+P2-A:6  Acc9  - Trigger multiply
+P2-A:7  Acc3  - Acc3 = Acc15
+P2-A:8  Acc3  - Trigger divide
+P2-A:9  Div   - Acc1 = Acc 2
+P2-A:10 Acc10 - Acc1 -= trays
+P2-A:11 Acc2  - Acc2 = Acc3
+P2-B:1  Acc4  - IP = A8
+P2-B:2  Acc14 - Acc14, do sign detection
+P2-B:3  Fun23 - Trigger argument for function table2
+P2-B:4  Acc19 - 2 waits
+P2-B:5  Acc19 - Receive function answer
+P2-B:6  Div   - Receive sqrt answer
+P2-B:7  Acc2  - Acc2 = Acc 8
+
+Trays:
+P8-A    Used to trigger receive programs on 15-20
+P8-B    Used to trigger send programs on 15-20
+P8-C    Used to clear registers 15-20
+P8-D    Used for sign detection
+P8-E    Used for sign detection

@@ -1,0 +1,110 @@
+initiating {
+  go P1-A:1
+  }
+accumulator 1 {
+  power True
+  alpha D1-A
+  program 5 {
+    mode 0
+    clear True
+    programin P1-A:2
+    programout P1-A:3
+    repeat 4
+    }
+  program 6 {
+    mode alpha
+    clear False
+    programin P1-A:3
+    repeat 1
+    }
+  }
+accumulator 2 {
+  power True
+  alpha D1-A
+  a D1-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:1
+    }
+  program 5 {
+    mode A
+    clear False
+    programin P1-B:1
+    programout P1-B:3
+    repeat 1
+    }
+  program 6 {
+    mode A
+    clear True
+    programin P1-B:2
+    programout P1-B:3
+    repeat 1
+    }
+  program 7 {
+    mode 0
+    clear True
+    programin P1-B:3
+    programout P1-B:4
+    repeat 2
+    }
+  program 8 {
+    mode alpha
+    clear False
+    programin P1-B:4
+    repeat 1
+    }
+  }
+accumulator 3 {
+  power True
+  alpha D1-B
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-B:4
+    }
+  }
+constant {
+  power True
+  program 9 {
+    mode lr
+    select l
+    programin P1-A:1
+    programout P1-A:2
+    }
+  outputa D1-A
+  regj +0000000002
+  }
+function 1 {
+  power true
+  program 1 {
+    clear nc
+    mode add
+    programin P1-A:2
+    }
+  outputnc P1-B:1
+  outputc P1-B:2
+  argin D1-A
+  outputa D1-A
+  outputb D1-B
+  a1 0
+  a2 0
+  a3 0
+  a4 0
+  b1 1
+  b2 2
+  b3 3
+  b4 4
+  suba10 true
+  subb10 true
+  data -2 +000000000012+
+  data -1 +000000000034+
+  data 0 +000000000056+
+  data 1 +001001000078+
+  data 2 +002001000090+
+  data 3 +003001000000+
+  data 4 +004001000000+
+  data 5 +005001000000+
+  data 6 +006001000000+
+  data 7 +007001000000+
+  }

@@ -1,0 +1,66 @@
+# phrase 1
+# phrase 2
+prhrase3, #--
+# phrase 1
+
+J = 99
+K = 48
+
+step
+1    P1-A:1   C9 LR J   ->   A4:1 0 alpha      D1-A      P1-A:2     ; Load 99 into counting accumulator (4)
+
+2    P1-A:2   M A:I     ->   O1 P1-D:1                              ; trigger outputting number, clear Stepper e
+              M E:C
+
+Print number and then print phrase 1
+
+3    P1-D:1   A4:5 0 A  ->   A1: 0 alpha SHR1  D1A       P1-A:3     ; load high byte into accumulator 1
+
+4    P1-A:3   C10 LR K  ->   A1:2 0 beta       D1A       P1-A:4     ; convert to ascii
+
+5    P1-A:4   Punch                                      p1-C:1     ; punch it
+
+6    P1-C:2   A1:3 C 0                                   p1-A:5     ; clear punch accumulator
+
+7    P1-A:5   C4:6 0 A  ->   A1:3 0 gamma LO1  D1A       p1-A:6     ; load low byte
+ 
+8    P1-A:6   C1:19 LR K ->  A1:6 0 beta       D1A       P1-A:4     ; punch it
+              A3:4 C 0                                              ; clear function argument accumulator
+            
+ 
+
+
+Setup
+  load 99 into acc 4
+
+Sub 1
+  Print value in acc4
+
+Punch IO
+  IN - P1-C:1
+  Out - P1-C:2 - (connected to input of stepper E)
+
+Stepper A: Master sequencer (triggered on P1-A:2)
+  O1- output number,phrase 1 - P1-D:1
+  02- Output number,phrase 2
+  03- Output phrase 3, decrement count
+  04- output number, phrase 1
+
+Stepper E: (Trigger by punch output)
+  O1: do digit 2 of number                  P1-E:2
+  O2: Do next message output                P1-E:5      
+
+
+Routines:
+
+  P1-D:1  - Setup phase 1, then trigger print of 10s digit
+  P1-D:2  - Setup phase 2, then trigger print of 10s digit
+  P1-D:3  - Setup phrase 3, -1 from count
+  P1-D:4  - Setup phrase 1, then trigger print of 10s digit
+  P1-D:5  - Check if song needs to continue
+
+  P1-E:1  - print 10s digit
+  p1-E:3  - Print units digit
+
+  P1-A:1  - Initial load of 99, clear other registers
+  P1-A:2  - Trigger next major sequence

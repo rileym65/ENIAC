@@ -1,0 +1,117 @@
+initiating {
+  go P1-A:1
+  }
+accumulator 1 {
+  power True
+  alpha D1-C
+  program 5 {
+    mode alpha
+    clear False
+    programin P1-A:3
+    repeat 1
+    }
+  }
+accumulator 2 {
+  power True
+  alpha D1-A
+  a D1-A
+  s D1-A
+  }
+accumulator 3 {
+  power True
+  alpha D1-A
+  gamma D1-C
+  a D1-C
+  }
+accumulator 4 {
+  power True
+  }
+accumulator 5 {
+  power True
+  alpha D1-B
+  gamma D1-A
+  a D1-C
+  s D1-C
+  }
+accumulator 6 {
+  power True
+  }
+accumulator 7 {
+  power True
+  alpha D1-C
+  a D1-C
+  alphafilter SHL1
+  }
+accumulator 8 {
+  power True
+  }
+accumulator 9 {
+  power True
+  alpha D1-A
+  a D1-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P1-A:1
+    }
+  program 2 {
+    mode A
+    clear False
+    programin P1-A:2
+    }
+  }
+accumulator 10 {
+  power True
+  alpha D1-A
+  a D1-B
+  program 2 {
+    mode A
+    clear False
+    }
+  program 5 {
+    mode A
+    clear False
+    programin P1-A:2
+    programout P1-A:4
+    repeat 1
+    }
+  program 6 {
+    mode 0
+    clear False
+    programin P1-A:4
+    programout P1-A:5
+    repeat 9
+    }
+  }
+constant {
+  power True
+  program 9 {
+    mode lr
+    select l
+    programin P1-A:1
+    programout P1-A:2
+    }
+  program 10 {
+    mode lr
+    select r
+    }
+  outputa D1-A
+  regj +0036000000
+  regk +0234500000
+  }
+divider {
+  power true
+  program 1 {
+    numclear true
+    nummode alpha
+    denclear true
+    denmode alpha
+    mode root10
+    interlock true
+    answer 3
+    interlockin P1-A:5
+    programin P1-A:2
+    programout P1-A:3
+    }
+  digitout D1-A
+  }

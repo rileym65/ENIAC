@@ -1,0 +1,81 @@
+initiating {
+  go P1-A:1
+  }
+accumulator 1 {
+  power True
+  beta D1-A
+  program 5 {
+    mode alpha
+    clear True
+    programin P1-A:2
+    programout P1-A:3
+    repeat 1
+    }
+  program 6 {
+    mode alpha
+    clear True
+    programin P1-A:4
+    programout P1-A:3
+    repeat 2
+    }
+  program 7 {
+    mode alpha
+    clear True
+    programin P1-A:5
+    programout P1-A:3
+    repeat 5
+    }
+  program 8 {
+    mode beta
+    clear False
+    programin P1-A:6
+    programout P1-A:3
+    repeat 1
+    }
+  program 9 {
+    mode beta
+    clear False
+    programin P1-A:7
+    programout P1-A:3
+    repeat 1
+    }
+  }
+constant {
+  power True
+  program 9 {
+    mode lr
+    select l
+    programin P1-A:6
+    }
+  program 10 {
+    mode lr
+    select r
+    programin P1-A:7
+    }
+  outputa D1-A
+  regj +0000000010
+  regk +0000000020
+  }
+cardpunch {
+  power True
+  programin P1-A:3
+  programout P1-A:1
+  }
+master {
+  power True
+  decade 19 1 5
+  decade 18 2 5
+  decade 19 2 2
+  decade 19 3 1
+  decade 18 4 5
+  decade 18 5 5
+  association 8 B
+  stepper B {
+    in P1-A:1
+    out 1 P1-A:2
+    out 2 P1-A:4
+    out 3 P1-A:5
+    out 4 P1-A:6
+    out 5 P1-A:7
+    }
+  }

@@ -1,0 +1,193 @@
+initiating {
+  go 
+  }
+accumulator 9 {
+  power True
+  s D5-A
+  program 1 {
+    mode alpha
+    clear False
+    programin P5-A:1
+    }
+  program 2 {
+    mode beta
+    clear False
+    programin P5-A:2
+    }
+  program 3 {
+    mode gamma
+    clear False
+    programin P5-A:3
+    }
+  program 4 {
+    mode delta
+    clear False
+    programin P5-A:4
+    }
+  program 5 {
+    mode epsilon
+    clear False
+    programin P5-A:5
+    repeat 1
+    }
+  program 6 {
+    mode S
+    clear False
+    programin P5-B:1
+    repeat 1
+    }
+  program 10 {
+    mode S
+    clear False
+    repeat 1
+    }
+  }
+accumulator 10 {
+  power True
+  s D5-B
+  program 1 {
+    mode alpha
+    clear False
+    programin P5-A:6
+    }
+  program 2 {
+    mode beta
+    clear False
+    programin P5-A:7
+    }
+  program 3 {
+    mode gamma
+    clear False
+    programin P5-A:8
+    }
+  program 4 {
+    mode delta
+    clear False
+    programin P5-A:9
+    }
+  program 5 {
+    mode epsilon
+    clear False
+    programin P5-A:10
+    repeat 1
+    }
+  program 6 {
+    mode S
+    clear False
+    programin P5-B:2
+    repeat 1
+    }
+  }
+accumulator 11 {
+  power True
+  alpha D5-A
+  a D5-A
+  right 12
+  program 1 {
+    mode alpha
+    clear False
+    programin P5-B:1
+    }
+  program 2 {
+    mode A
+    clear False
+    programin P5-B:3
+    }
+  }
+accumulator 12 {
+  power True
+  alpha D5-B
+  a D5-B
+  left 11
+  }
+accumulator 13 {
+  power True
+  alpha D5-C
+  beta D5-B
+  gamma D5-A
+  right 14
+  program 1 {
+    mode beta
+    clear False
+    programin P5-B:2
+    }
+  program 2 {
+    mode gamma
+    clear False
+    programin P5-B:3
+    }
+  program 5 {
+    mode A
+    clear False
+    programin P5-B:4
+    repeat 1
+    }
+  program 6 {
+    mode S
+    clear False
+    programin P5-B:5
+    repeat 1
+    }
+  program 7 {
+    mode AS
+    clear False
+    programin P5-B:6
+    repeat 1
+    }
+  program 8 {
+    mode A
+    clear True
+    programin P5-B:7
+    repeat 1
+    }
+  program 9 {
+    mode S
+    clear True
+    programin P5-B:8
+    repeat 1
+    }
+  program 10 {
+    mode AS
+    clear True
+    programin P5-B:9
+    repeat 1
+    }
+  }
+accumulator 14 {
+  power True
+  alpha D5-D
+  gamma D5-B
+  left 13
+  }
+constant {
+  }
+multiplier {
+  power true
+  ralpha P5-A:1
+  rbeta P5-A:2
+  rgamma P5-A:3
+  rdelta P5-A:4
+  repsilon P5-A:5
+  dalpha P5-A:6
+  dbeta P5-A:7
+  dgamma P5-A:8
+  ddelta P5-A:9
+  depsilon P5-A:10
+  outputa P5-B:4
+  outputs P5-B:5
+  outputas P5-B:6
+  outputac P5-B:7
+  outputsc P5-B:8
+  outputasc P5-B:9
+  outputrs P5-B:1
+  outputds P5-B:2
+  outputf P5-B:3
+  lhpp1 D5-A
+  lhpp2 D5-B
+  rhpp1 D5-C
+  rhpp2 D5-D
+  }
+hopper +0000000008+0000000007
+hopper +0000000004+0000000005
+hopper +0000000012+0000000020
+hopper +0000000123+0000000456

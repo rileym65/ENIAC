@@ -1,0 +1,80 @@
+-2.0,-1.0 through +0.5,+1.0 takes 10,428,406 cycles.  At 5,000 per second that
+comes out to 2,085 seconds or 34.7 minutes on the real ENIAC
+
+
+Acc 3 - Cx               - Sends on D1-D
+Acc 4 - Cy               - Sends on D1-E            
+Acc 5 - Zx               - Sends on D1-A
+Acc 6 - Zy               - Sends on D1-B
+Acc 7 - Xtmp             - Sendso n D1-B
+Acc 8 - Temp             - Sends on D1-E
+Acc 9 - Multiplier
+Acc 10 - Multiplicand
+Acc 11 - LHPP I
+Acc 12 - Ytmp            - Sends on D1-A
+Acc 13 - RHPP I          - Sends on D1-C
+Acc 14 - Tmp2            - Sends on P1-H (under 4), P1-I (over 4)
+
+P1-A:1 - Load starting Cx into Cx
+P1-A:2 - Load starting Cy into Cy
+
+P1-C:1  Mp  - Zx = 0, Zy = 0, Clear stepper C
+P1-C:2  A6  - Input to stepper C - iterator (A14 also can trigger)
+P1-C:3  Mp  - Shift in a 1
+P1-C:4  A14 - Shift in a 0
+P1-C:5  Mp  - Punch output, Clear Cx
+P1-C:6  Cp  - Stimulate function table to increment Cy, Reload Cx from constant
+P1-C:7  A4  - Receive increment of Cy
+P1-C:8  A4  - Start next row
+
+P1-B:1  Mp  - Start iteration - xt = X * X
+P1-B:2  Mu  -    Xt -= Y * Y
+P1-B:3  Mu  -    Yt = X * Y, Clear Zy at end
+P1-B:4  Mu  -    Dummy to allow multiplication to end
+P1-B:5  A7  -    Zy = 2 * Ytmp, Clear Zx, Xtmp += Cx
+P1-B:6  A6  -    Zy += Cy, Zx = Xtmp
+P1-B:7  A5  -    Tmp2 = x * x
+P1-B:8  Mu  -    tmp2 += Y * Y
+P1-B:9  Mu  -    Dummy, allow multiplication to end
+P1-B:10 A8  -   Tmp2 -= 4
+P1-B:11 A14 -   Magnitude discrimination on Acc 14
+
+P1-D:1  A7  - A1 -> A12 SHL 1
+P1-D:2  A1  - A12 -> A1
+P1-D:3  A1  - A1 += A2 SHR 9
+P1-D:4  A1  - A2 -> A12 SHL 1
+P1-D:5  A2  - A12 -> A2
+P1-D:6  A2  - A2 += A15 shr 9
+P1-D:7  A2  - A15 -> A12 SHL 1
+P1-D:8  A15 - A15 = A12
+P1-D:9  A15 - A15 += A16 shr 9
+P1-D:10 A15 - A16 -> A12 SHL 1
+P1-D:11 A16 - A16 = A12
+P1-E:1  A16 - A16 += A17 shr 9
+P1-E:2  A16 - A17 -> A8 shl 1
+P1-E:3  A17 - A17 = A8
+P1-E:4  A17 - A17 += A18 shr 9
+P1-E:5  A17 - A17 -> A8 shl 1
+P1-E:6  A18 - A18 = A8
+P1-E:7  A18 - A18 += A19 shr 9
+P1-E:8  A18 - A19 -> A8 shl 1
+P1-E:9  A19 - A19 = A8
+P1-E:10 A19 - A9 += A20 shr 9
+P1-E:11 A19 - A20 -> A8 shl 1
+P1-F:1  A20 - A20 = A8
+P1-F:2  A20 - A20 += A7
+P1-F:3  A20 - Trigger Function table to return xinc
+P1-F:4  A20 - Function result added to A3
+P1-F:5  A3  - Trigger next x calculation
+
+Const J - Starting Cx
+Const K - Starting Cy
+
+func1a(0) = deltaX       - Sends on D1-A
+func1b(0) = deltaY       - Sends on D1-B
+
+Stepper B - Controls y loop, in = P1-C:8
+Stepper C - Controls calculation iteration , In = P1-C:2
+Stepper E - Controls x loop, in=P1-F:5
+
+

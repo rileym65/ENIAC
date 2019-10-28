@@ -1,0 +1,209 @@
+adder.en
+========
+This setup reads two values from the Constant Transmitter into two
+different accumulators and then adds them together.  Answer is in
+Accumulator 1
+
+P1-A:1  Init    Acc1 = Constant register J
+P1-A:2  Const   Acc2 = Constant register K
+P1-A:3  Const   Acc1 += Acc2
+
+
+
+division.en
+===========
+This setup demonstrates usage of the divider to divide 0.5 by 0.2.
+Answer is in Accumulator 1
+
+P1-A:1  Init    Acc9 = Constant register J (0.5)
+P1-A:2  Const   Acc10 = Constant register K (0.2)
+P1-A:3  Const   Acc1 = Acc9 / Acc10
+                Trigger P1-A:5 on Acc10
+P1-A:5  Acc10   Acc10 waits 9 addition times and then
+                sends P1-A:6
+P1-A:6  Acc10   Pulse division interlock
+P1-A:4  Div     Acc1 = Quotient (Acc2)
+
+
+
+double.en
+=========
+This setup demonstrates the use of two accumulators to produce a
+single 20-digit value.  Accumulators 1 and 2 are tied together and
+will receive a value from Accumulators 3 and 4.  Note that only
+one program control on Accumulator 1/2 is actually triggered.
+
+P1-A:1  Init    Acc3 = Constant register J
+P1-A:2  Const   Acc4 = Constant register K
+P1-A:3  Const   Double Acc1/2 = Acc3, Acc4
+
+
+
+doublecarry.en
+==============
+This setup demonstrates carry over on double accumulators
+
+P1-A:1  Init   Acc3 = 1, Acc2 = Constant register J (+9999999999)
+P1-A:2  Const  Double Acc1/2 += Acc3
+
+
+
+factorial.en
+============
+This setup computes the factorial of the number in the
+Constant Transmitter register J
+
+P1-A:1  Init   Acc1, Acc2 = Constant register J, Acc3 = 1
+P1-A:2  Const  Acc2 -= Acc3*2 (Acc3 holds 1)
+P1-A:4  Acc2   Acc2 => D1-B, Ends if Acc2 is negative
+P1-B:1  Acc2   Acc2 += 1
+P1-A:3  Acc2   Acc1 * Acc2
+P5-B:7  Mult   Acc1 = multiply result, then trigger P1-A:2
+
+
+
+fibonacci.en
+============
+This setup punches out the first 50 Fibonacci Numbers
+
+P1-A:1  Init   Acc3=0, Acc4=1, Acc5=0
+P1-A:2  Acc3   Acc1=Acc3(cleared), Acc5=Acc3   
+P1-A:3  Acc3   Acc3=Acc4(cleared), Acc5+=Acc4
+P1-A:4  Acc3   Acc4=Acc5(Cleared)
+P1-A:5  Acc4   Trigger master programmer
+P1-A:6  Mprog  Punch current number
+P1-A:7  Pnch   Acc1=0, then trigger P1-A:2 to loop
+
+
+
+filter.en
+=========
+Thie setup demonstrates the usage of input filters.  When accumulator 1
+is sent to accumulator 2 it will be modified by the active filter.  By
+changing which input program 5 is using on accumulator 2 you can see
+the affects of several filters.  Also try changing out the filters for
+others to see what other filters do
+
+P1-A:1  Init    Acc1 = Constant register J
+P1-A:2  Acc1    Acc2 = Acc1 modified by filter
+
+
+
+function.en
+===========
+This setup reads a value from function table 1.  Accumulator 1 
+demonstrates how to receive the value when the accumulator is 
+triggered at the same time as the function table.  Accumulator 2
+shows how to receive a value from the argument triggering pulse
+sent from the function table.  Accumulator 2 is also providing
+the function argument
+
+P1-A:1  Init    Acc2 = Constant register J (2)
+P1-A:2  Const   Trigger function table
+                Trigger wait program on Acc 1
+P1-B:2  Func1   Trigger argument transmission from Acc 2
+P1-B:3  Acc2    Trigger wait program on Acc 2
+P1-B:4  Acc2    Acc2 = function result
+P1-A:3  Acc1    Acc1 = function result
+Note:  P1-B:4 and P1-A:3 will occur at the same time.
+
+
+
+masterprog.en
+=============
+This setup demonstrates the looping capabilities provided by the
+Master Programmer.  The setup itself counts from 1 to 300, but changes
+the increment at 50, 100, 150, and 200.  The counting output is punched
+on cards and can be seen on the card punch.
+
+P1-A:1  Init    Trigger output from master programmer
+P1-A:2  Mprog   Stage 1 output, Acc += 1
+P1-A:3  Acc1    Punch card then trigger P1-A:1 
+P1-A:4  Mprog   Stage 2 output, Acc += 2, then trigger P1-A:3
+P1-A:5  Mprog   Stage 3 output, Acc += 5, then trigger P1-A:3
+P1-A:6  Mprog   Stage 4 output, Acc += 10, then trigger P1-A:3
+P1-A:7  Mprog   Stage 5 output, Acc += 20, then trigger P1-A:4
+
+
+
+multiply.en
+===========
+This setup demonstrates the usage of the multiplier
+
+P1-A:1  Init    Clear Acc1.  Acc2 = Constant register J
+P1-A:2  Const   Acc3 = Constant register K
+P1-A:3  Const   Acc2 * Acc3
+P1-A:4  Mult    Acc1 = result
+
+
+
+multiread.en
+============
+This setup reads several cards, two numbers per card then adds
+them together and punches a card with the result.  The setup
+triggers the next card read while the calculation and punching
+happens, so a certain amount of parallel processing is occuring
+in this setup.  This setup should be started with the "Start"
+button rather than the "Go" button.
+
+        Start   Read a card
+P1-A:2  Rdr     Acc1 = Constant register A
+P1-A:3  Const   Acc2, Acc15 = Constant register B
+p1-A:4  Const   Acc15 += Acc1, Start next card read
+P1-A:5  Acc1    Punch card
+P1-A:6  Pnch    Acc1 = 0, Acc2 = 0, Acc15 = 0
+P1-B:1  Acc15   Trigger reader interlock, When next card is done
+                reading P1-A:2 will be generated
+
+
+
+punch.en
+========
+This setup reads two values from the constant transmitter and then
+punches them onto a card.
+
+P1-A:1  Init    Acc1 = Constant register J
+P1-A:2  Const   Acc2 = Constant register K
+                Acc15 = Constant register K
+P1-A:3  Const   Acc15 += Acc1
+P1-A:5  Acc1    Punch card
+
+
+
+reader.en
+=========
+This setup demonstrates how to read values from a card
+
+P1-A:1  Init    Trigger reader to read a card
+                Also trigger reader interlock
+P1-A:2  Rdr     Acc1 = Constant register A
+P1-A:3  Const   Acc2 = Constant register B
+
+
+
+sqr.en
+======
+This setup squares the value located in constant register J.  The
+technique used demonstrates the use of magnitude discrimination to
+make decisions on how to continue processing.
+
+P1-A:1  Init    Acc1 = 0, Acc3 = 1, Acc2 and 4 = Constant register J
+P1-A:2  Const   Acc2 -= Acc3 (1)
+P1-A:3  Acc2    Will trigger P1-D:1 if Acc2 is positive, otherwise
+                calculation is complete and no further actions are
+                performed
+P1-D:1  Acc2    Acc1 += Acc4, then trigger P1-A:2
+
+
+
+sroot.en
+========
+This setup shows how to use the square rooter to obtain a square
+root.  Note, the square rooter actually returns 2 times the
+square root.
+
+P1-A:1  Init    Acc9 = Constant register J
+P1-A:2  Const   Trigger root operation with Acc9 as arg
+P1-A:4  Acc10   Trigger delay program for rooter interlock
+P1-A:5  ACC10   Send rooter interlock
+P1-A:3  Div     Acc1 = result
